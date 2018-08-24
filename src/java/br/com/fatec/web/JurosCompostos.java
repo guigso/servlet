@@ -38,35 +38,42 @@ public class JurosCompostos extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Juros compostos - Projeto01</title>");
-            out.println("<link rel=\'stylesheet\' href=\'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\'>");
-            out.println("<script src=\'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\'></script>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">");
             out.println("</head>");
             out.println("<body>");
-            out.println("<style>label{display: inline-block;width: 90px;}.contentwrapper{background-color:lightblue;height:35%;width:30%;padding:3px;margin:0 auto;border-radius:5px;border-style:solid}table,th,td{border: 1px solid black;border-collapse: collapse;}</style>");
-            out.println("<h3 style='text-align:center'><a href='home.html'>Home</a></h3>");
+            out.println("<style>.texto{\n"
+                    + "        font-family: Verdana, Times, serif;\n"
+                    + "        color: rgb(253, 253, 253);\n"
+                    + "        text-shadow: 1px 2px rgb(123, 132, 141);\n"
+                    + "        line-height: 1.7;\n"
+                    + "        letter-spacing: 0.6px;\n"
+                    + "    }\n" + "label{display: inline-block;width: 130px;text-align:center}.contentwrapper{background-color:rgb(44, 165, 196);height:35%;width:40%;padding:3px;margin:0 auto;border-radius:5px;border-style:solid}table,th,td{border: 1px solid black;border-collapse: collapse;}</style>");
+            out.println("<nav style='margin-bottom:5px;border-radius:5px;;border:solid 2px black'class=\"navbar navbar-dark bg-info\">\n"
+                    + " <a class=\"navbar-brand\" href=\"./home.html\"><h4>Home</h4></a>\n"
+                    + "</nav>");
             out.println("<div class='contentwrapper'>");
-            out.println("<h2>Calcular Juros Compostos</h2>");
-            out.println("<div style=''><form action='juros-compostos.html'>");
-            out.println("<label>Valor inicial: </label><input type='text' name ='v1'><br>");
-            out.println("<label>Juros mensal: </label><input type='text' name ='jm' placeholder='Valor em %'><br>");
-            out.println("<label>Meses: </label><input type='text' name ='mes'><br> ");
+            out.println("<h2 class ='texto'style='text-align:center;'>Calcular Juros Compostos</h2>");
+            out.println("<div class='form-group texto'><form action='juros-compostos.html'>");
+            out.println("<label for='v1'>Valor inicial: </label><input type='text' id='v1' name ='v1'><br>");
+            out.println("<label for='jm'>Juros mensal: </label><input type='text' id='jm' name ='jm' placeholder='Valor em %'><br>");
+            out.println("<label for='mes'>Meses: </label><input type='text' id='mes' name ='mes'><br> ");
             out.println("<div style='text-align:center;margin:2px'><input type='submit' value='Calcular' class='btn btn-primary'></div></div>");
             out.println("</div>");
             double v1 = Double.parseDouble(request.getParameter("v1"));
             double jm = Double.parseDouble(request.getParameter("jm"));
             double mes = Double.parseDouble(request.getParameter("mes"));
-            out.println("<div class='contentwrapper' style='margin-top:15px'><table>");
-            out.println("<tr><th>Mes</th><th>Montante</th></tr>");
+            out.println("<div class='contentwrapper' style='margin-top:15px'><table class='table'>");
+            out.println("<tr><thead class='thead-dark'><th>Mes</th><th>Montante</th></tr></thead>");
             for (int i = 1; i <= mes; i++) {
-                out.println("<tr>");
-                out.println("<td>" + i + "</td>");
-                out.println("<td>" + Math.round((v1 * (Math.pow((1 + jm / 100), i)))*100.0)/100.0 + "</td>");
+                out.println("<tr class='texto'>");
+                out.println("<td>" + i + "º" + "</td>");
+                out.println("<td>" + "R$ " + Math.round((v1 * (Math.pow((1 + jm / 100), i))) * 100.0) / 100.0 + "</td>");
                 out.println("</tr>");
             }
             out.println("</table>");
-            out.println("<input type='submit'  value='Resetar'>");
+            out.println("<div style='text-align:center;'><a href=\"juros-compostos.html\" style=\"margin-top:5px;\" class =\"btn btn-danger\">Resetar</a></div>");
             out.println("</div>");
-            
+
             out.println("</body>");
             out.println("</html>");
         }
