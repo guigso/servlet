@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author oper1.goliveira
  */
-@WebServlet(name = "JurosSimples", urlPatterns = {"/juros-simples"})
+@WebServlet(name = "JurosSimples", urlPatterns = {"/juros-simples.html"})
 public class JurosSimples extends HttpServlet {
 
     /**
@@ -36,11 +36,41 @@ public class JurosSimples extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet JurosSimples</title>");            
+            out.println("<title>Juros Simples - Projeto01</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet JurosSimples at " + request.getContextPath() + "</h1>");
+            out.println("<style>label{display: inline-block;width: 90px;}.contentwrapper{background-color:lightblue;height:35%;width:30%;padding:3px;margin:0 auto;border-radius:5px;border-style:solid}table,th,td{border: 1px solid black;border-collapse: collapse;}</style>");
+            out.println("<h3 style='text-align:center'><a href='home.html'>Home</a></h3>");
+            out.println("<div class='contentwrapper'>");
+            out.println("<h2>Calcular Juros Simples</h2>");
+            out.println("<div style=''><form action='juros-simples.html'>");
+            out.println("<label>Valor inicial: </label><input type='text' name ='v1'><br>");
+            out.println("<label>Juros mensal: </label><input type='text' name ='jm' placeholder='Valor em %'><br>");
+            out.println("<label>Meses: </label><input type='text' name ='mes'><br> ");
+            out.println("<div style='text-align:center;margin:2px'><input type='submit' value='Calcular' class='btn btn-primary'></div></div>");
+            
+            /**Declarando as variaveis**/
+            /** v1 = Valor Inicial **/
+            double v1  = Double.parseDouble(request.getParameter("v1"));
+            
+            /** jm = Juros Mensal  **/
+            double jm  = Double.parseDouble(request.getParameter("jm"));
+            
+            /** mes = Mês do ano    **/
+            int    mes = Integer.parseInt(request.getParameter("mes"));
+            
+            /** Cauculo para gerar o juros simples   **/
+            double js  = v1 * (1 + (jm / 100) * mes);
+            
+            out.println("</div>");
+            out.println("</div>");
+            
+            out.println("<div class='contentwrapper' style='margin-top:15px'>");
+            /** Exibe o resultado  **/
+            out.println(" <h4>Valor do Juros Simples " + Math.round(js*100.0)/100.0 + "</h4>");
+            out.println("<input type='submit'  value='Resetar'>");
+            out.println("</div>");
+
             out.println("</body>");
             out.println("</html>");
         }
